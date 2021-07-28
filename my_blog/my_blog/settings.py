@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ckeditor',
-    'tinymce',
     'ckeditor_uploader',
     'blog.apps.BlogConfig'
 ]

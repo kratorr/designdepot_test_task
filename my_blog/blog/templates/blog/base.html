@@ -4,9 +4,10 @@
     <head lang="en">
         <meta charset="UTF-8" />
         <title>Blog</title>
+        
     </head>
     <body>
-        <h1>Блог</h1>
+        <h1><a href="{% url 'home' %}">Блог</a></h1>
         {% block body_block %}
         {% endblock %}
     </body>
