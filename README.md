@@ -29,14 +29,28 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 Примените миграции
-```sh
+```bash
 python manage.py migrate
+```
+
+Создайте суперпользователя
+```bash
+python manage.py createsuperuser
 ```
 
 Запустите сервер:
 
-```sh
+```bash
 python manage.py runserver
+```
+Запустите сервер:
+
+```bash
+python manage.py runserver
+```
+Админка доступна по адресу:
+```bash
+http://127.0.0.1:8000/
 ```
 
 
