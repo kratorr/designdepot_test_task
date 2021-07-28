@@ -1,7 +1,8 @@
 from django.views import generic
+from django.http import HttpResponseRedirect
 
-
-from .models import Post, Category, Tag
+from .models import Post, Category, Tag, Feedback
+from .forms import FeedbackForm
 
 
 class PostList(generic.ListView):
@@ -12,6 +13,7 @@ class PostList(generic.ListView):
         context = super(PostList, self).get_context_data(**kwargs)
         context['tags'] = Tag.objects.all()
         context['categories'] = Category.objects.all()
+        context['form'] = FeedbackForm()
         return context
 
 
@@ -32,7 +34,7 @@ class CategoryList(generic.ListView):
 
     def get_queryset(self, *args, **kwargs):
         qs = super().get_queryset().filter(category__id=self.kwargs['pk'])
-        return qs 
+        return qs
 
     def get_ordering(self):
         ordering = self.request.GET.get('ordering', '-created_at')
@@ -51,8 +53,18 @@ class TagList(generic.ListView):
 
     def get_queryset(self, *args, **kwargs):
         qs = super().get_queryset().filter(tags__id=self.kwargs['pk'])
-        return qs 
+        return qs
 
     def get_ordering(self):
         ordering = self.request.GET.get('ordering', '-created_at')
         return ordering
+
+
+class FeedbackCreateView(generic.CreateView):
+    model = Feedback
+    succes_url = '/blog/'
+    fields = ['email', 'text']
+    success_message = "test was created successfully"
+
+    def form_valid(self, form):
+        return HttpResponseRedirect('/')

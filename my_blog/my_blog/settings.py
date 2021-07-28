@@ -13,7 +13,19 @@ import os
 
 
 from pathlib import Path
+from environs import Env
+from dotenv import load_dotenv
 
+load_dotenv()
+
+env = Env()
+env.read_env()
+
+DEBUG = env.bool('DEBUG', default=False)
+
+SECRET_KEY = env.str('SECRET_KEY', default='YOU_MUST_CHANGE_IT')
+
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', ['127.0.0.1', 'localhost'])
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,13 +35,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-5!=p!qrf6jyl4q9$cwl#&#euhngk0o*i&%e!^(-e4g94lwx-7z'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
 
 # Application definition
 

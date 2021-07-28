@@ -1,7 +1,6 @@
 
 {% extends 'blog/base.html' %}
 
-{% load blog_template_tags %}
 {% block body_block %}
 
 
@@ -27,7 +26,6 @@
 </div>
 
 
-
 <div>
     <ul>
         {% for post in object_list %}
@@ -46,5 +44,17 @@
     {% endfor %}
     </ul>
 </div>
+
+
+
+<div>
+    <form action="{% url 'feedback' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Отправить отзыв">
+    </form>
+</div>
+
+{{ test }}
 
 {% endblock %}

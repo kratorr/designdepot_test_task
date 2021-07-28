@@ -1,6 +1,5 @@
 from django.db import models
 
-
 from django.conf import settings
 
 
@@ -26,9 +25,19 @@ class Category(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=150, verbose_name='Заголовок')
-    tags = models.ManyToManyField(Tag, related_name='posts', verbose_name='Тэг')
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
-    updated_at = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
+    tags = models.ManyToManyField(
+        Tag,
+        related_name='posts',
+        verbose_name='Тэг'
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата создания'
+    )
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        verbose_name='Время изменения'
+    )
     content = RichTextUploadingField(blank=True, verbose_name='Содержание')
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -57,3 +66,6 @@ class Feedback(models.Model):
         auto_now_add=True,
         verbose_name='Дата создания'
     )
+
+    def __str__(self):
+        return f'{self.email}  -  {self.text[:100]}'
