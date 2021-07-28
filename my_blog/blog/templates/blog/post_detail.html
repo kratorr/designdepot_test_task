@@ -1,0 +1,10 @@
+<b>Категория:</b> {{ post.category }} 
+<b>Tэги </b>: {% for tag in post.tags.all %} {{ tag.name }} {% empty %} No tags! {% endfor %}
+
+
+{{ post }}
+
+
+{{ post.content|safe }}
+
+<div>Дата: {{ post.created_at|date }} Автор: {{ post.author.username }} </div>

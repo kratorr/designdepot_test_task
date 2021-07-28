@@ -1,0 +1,51 @@
+
+{% extends 'blog/base.html' %}
+
+{% load blog_template_tags %}
+{% block body_block %}
+
+<div>
+    Сортировка по дате:
+    <a href="{% url 'home' %}?order=desc&{{ request.GET.urlencode }}">Сначала новые</a>
+    <a href="{% url 'home' %}?order=asc&{{ request.GET.urlencode }}">Сначала старые</a>
+    <b>{{ request }}</b>
+</div>
+
+<div>
+
+    {% for category in categories %}
+       <a href="/?category={{ category }}"> {{ category }} </a>
+    {% endfor %}
+</div>
+
+
+<div>
+
+    {% for tag in tags %}
+    <a href="/?tag={{ tag }}"> {{ tag }} </a>
+    {% endfor %}
+</div>
+
+
+
+<div>
+    <ul>
+        {% for post in object_list %}
+        
+        <li> <h3><a href="/post/{{ post.id }}/">{{ post.title }} </a> </h3>
+            <b>Категория:</b> {{ post.category }} 
+            <b>Tэги </b>: {% for tag in post.tags.all %} {{ tag.name }} {% empty %} No tags! {% endfor %}
+        
+            <div>
+             {{ post.content|truncatechars_html:200|safe }}
+            </div>
+             <hr/>
+             <div>Дата: {{ post.created_at|date }} Автор: {{ post.author.username }} </div>
+        </li>
+    {% empty %}
+        <li>Нет постов.</li>
+    {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

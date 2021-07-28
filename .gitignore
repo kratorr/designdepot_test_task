@@ -90,3 +90,6 @@ db.sqlite3
 .idea/
 venv/
 /venv/
+.vscode
+static_files/
+media/
